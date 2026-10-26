@@ -23,7 +23,6 @@ function addtocart() {
   prix : price.value,
   }
   produits.push(temp)
-  temp={}
   console.log(produits)
 
   addtopanel()
@@ -32,6 +31,7 @@ function addtocart() {
 }
 
 function addtopanel() {
+  placement.textContent = ""
   for (let i = 0; i < produits.length; i++) {
     const li = document.createElement("li")
     const div = document.createElement("div")
@@ -39,14 +39,17 @@ function addtopanel() {
     const span = document.createElement("span")
     const delbtn = document.createElement("button")
 
-    strong = produits[i].nom
+    strong.textContent = produits[i].nom
     strong.setAttribute("class", "nom-produit")
 
-    span = produits[i].prix
+    span.textContent = produits[i].prix
     span.setAttribute("class", "prix-produit")
 
     li.setAttribute("class", "produit")
+
+    delbtn.textContent = "retirer"
     delbtn.setAttribute("class", "supprimer")
+    delbtn.setAttribute("onclick",`retreat("${(produits[i].id)}")`)
 
     div.append(strong)
     div.append(span)
@@ -57,6 +60,21 @@ function addtopanel() {
   console.log(produits)
 }
 
-btn.addEventListener("click",() =>{
+btn.addEventListener("click",(e) =>{
+  e.preventDefault()
+  if (nam.value=="" || price.value=="") {
+    window.alert("please fill the required field");
+        return;
+  }
   addtocart()
 })
+
+function retreat(a){
+  for (let i = 0; i <= produits.length-1; i++) {
+    if(produits[i].id==a){
+      produits.splice(i,1)
+      addtopanel()
+    }
+    
+  }
+}

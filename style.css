@@ -129,6 +129,7 @@ button:focus-visible {
   padding: 24px 0;
   text-align: center;
   color: #64756d;
+  display: none;
 }
 .total {
   display: flex;
